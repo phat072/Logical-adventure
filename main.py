@@ -8,7 +8,7 @@ from Object import *
 from Object import Object
 from Player import Player
 from Agent import Agent
-from map import Map
+from Map import Map
 from Constants import *
 from Constants import CELL_SIZE
 
