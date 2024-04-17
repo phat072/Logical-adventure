@@ -3,6 +3,7 @@ import os
 import time
 from collections import defaultdict
 
+
 # Function to parse a DIMACS file
 def parse_dimacs(filename):
     Clauses = []
@@ -19,6 +20,7 @@ def parse_dimacs(filename):
             Clauses.append(literals)
     return Clauses
 
+
 # Function to implement the Jeroslow-Wang heuristic
 def jersolow_wang_method(cnf):
     literal_weight = defaultdict(int)
@@ -29,6 +31,7 @@ def jersolow_wang_method(cnf):
     # Return literal with maximum weight
     return max(literal_weight, key=literal_weight.get)
 
+
 # Function to implement the two-sided Jeroslow-Wang heuristic
 def jersolow_wang_2_sided_method(cnf):
     literal_weight = defaultdict(int)
@@ -38,6 +41,7 @@ def jersolow_wang_2_sided_method(cnf):
             literal_weight[abs(literal)] += 2 ** -len(clause)
     # Return literal with maximum weight
     return max(literal_weight, key=literal_weight.get)
+
 
 # Function to perform Boolean Constraint Propagation (BCP)
 def bcp(cnf, unit):
@@ -57,6 +61,7 @@ def bcp(cnf, unit):
             new_cnf.append(clause)
     return new_cnf
 
+
 # Function to assign units
 def assign_unit(cnf):
     I = []  # contains the bool assignments for each variable
@@ -73,6 +78,7 @@ def assign_unit(cnf):
         unit_clauses = [clause for clause in cnf if len(clause) == 1]  # update
     return cnf, I
 
+
 # DPLL algorithm
 def backtrack(cnf, I):
     cnf, unit_I = assign_unit(cnf)
@@ -87,6 +93,7 @@ def backtrack(cnf, I):
     if not res:
         res = backtrack(bcp(cnf, -selected_literal), I + [-selected_literal])
     return res
+
 
 # Function to run benchmarks
 def run_benchmarks(Fname):
@@ -103,6 +110,7 @@ def run_benchmarks(Fname):
             out_file.write('\n')
     end_time = time.time()
     print('Execution time: %.2f seconds' % (end_time - start_time))
+
 
 # Main function
 if __name__ == '__main__':
