@@ -30,6 +30,8 @@ def findLiteral(self, literal):
 
 
 class KnowledgeBase:
+    """A class representing a knowledge base for a logic system."""
+
     def __init__(self):
         self.__clauses = []
         self.__sources = []
