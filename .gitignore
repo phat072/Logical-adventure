@@ -3,3 +3,4 @@
 #source venv/bin/activate
 .venv
 .idea
+__pycache__

@@ -8,6 +8,16 @@ C = [0, -1, 0, 1]
 
 
 def forceAStep(self, n):  # return coordinate, isShooting, maybePit
+    """
+    This function is used to force a step in the agent's movement. It uses unit propagation to determine the next step.
+    It returns the coordinates of the next step, a boolean indicating if the agent is shooting, and a boolean indicating if there might be a pit.
+
+    Parameters:
+    n (int): The size of the map.
+
+    Returns:
+    tuple: A tuple containing the coordinates of the next step, a boolean indicating if the agent is shooting, and a boolean indicating if there might be a pit.
+    """
     Result, groundTruth = unitPropagation(self.kb.clauses, {})
 
     vst = set()
@@ -56,6 +66,16 @@ def forceAStep(self, n):  # return coordinate, isShooting, maybePit
 
 
 def nearestSafeCell(self, n):  # return coordinate
+    """
+    This function is used to find the nearest safe cell for the agent to move to.
+    It returns the coordinates of the nearest safe cell.
+
+    Parameters:
+    n (int): The size of the map.
+
+    Returns:
+    list: A list containing the coordinates of the nearest safe cell.
+    """
     if (self.agentLoc[0], self.agentLoc[1]) == (3, 1):
         i = 0
     vst = set()
@@ -89,6 +109,16 @@ def nearestSafeCell(self, n):  # return coordinate
 
 
 def findASafeStep(self, mapSize):  # return coordinate
+    """
+    This function is used to find a safe step for the agent to take.
+    It updates the safe list and returns the coordinates of the nearest safe cell.
+
+    Parameters:
+    mapSize (int): The size of the map.
+
+    Returns:
+    list: A list containing the coordinates of the nearest safe cell.
+    """
     # update safe list
     # print(self.kb.clauses)
     Result, groundTruth = unitPropagation(self.kb.clauses, {})
@@ -107,6 +137,16 @@ def findASafeStep(self, mapSize):  # return coordinate
 
 
 def perceiveEnvironment(self, map):
+    """
+    This function is used to perceive the environment around the agent.
+    It updates the agent's knowledge base based on the current cell and its surrounding cells.
+
+    Parameters:
+    map (list): The map of the environment.
+
+    Returns:
+    None
+    """
     # visited
     currentCell = str(self.agentLoc[0]) + '_' + str(self.agentLoc[1])
     print('map :', map[self.agentLoc[0]][self.agentLoc[1]])
@@ -175,6 +215,17 @@ def perceiveEnvironment(self, map):
 
 
 def shoot(self, target, map):
+    """
+    This function is used to shoot a target in the map.
+    It updates the agent's points and the map based on the result of the shooting.
+
+    Parameters:
+    target (list): The coordinates of the target.
+    map (list): The map of the environment.
+
+    Returns:
+    None
+    """
     self.point += reward.PUNISHMENT_FOR_SHOOTING
     if 'W' not in map[target[0]][target[1]]:  # no wumpus killed
         return
@@ -218,6 +269,16 @@ def shoot(self, target, map):
 
 
 def playPath(self, des):
+    """
+    This function is used to play a path from the agent's current location to a destination.
+    It returns the path as a list of coordinates.
+
+    Parameters:
+    des (list): The coordinates of the destination.
+
+    Returns:
+    list: A list of coordinates representing the path from the agent's current location to the destination.
+    """
     q = deque()
     q.append(self.agentLoc)
     trace = {}

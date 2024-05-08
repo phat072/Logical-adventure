@@ -5,6 +5,14 @@ from Constants import *
 
 class Cell(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, initial_scale=1.0):
+        """
+        Initializes a new instance of the Cell class.
+
+        Parameters:
+        pos_x (int): The x-coordinate of the cell.
+        pos_y (int): The y-coordinate of the cell.
+        initial_scale (float): The initial scale of the cell image.
+        """
         super().__init__()
         # Random floor asset
         picture_path = "graphics/catacombs_" + str(random.randrange(0, 11)) + ".png"
@@ -35,6 +43,15 @@ class Cell(pygame.sprite.Sprite):
 class Object(pygame.sprite.Sprite):
     def __init__(self, picture_path, cell: Cell | None = None, cell_center: tuple[int, int] | None = None,
                  initial_scale=1.0):
+        """
+        Initializes a new instance of the Object class.
+
+        Parameters:
+        picture_path (str): The path to the image file for the object.
+        cell (Cell): The cell that the object is in.
+        cell_center (tuple[int, int]): The center of the cell that the object is in.
+        initial_scale (float): The initial scale of the object image.
+        """
         super().__init__()
 
         # Set scale
@@ -60,6 +77,15 @@ class Object(pygame.sprite.Sprite):
 class Wumpus():
     def __init__(self, picture_path, cell: Cell | None = None, cell_center: tuple[int, int] | None = None,
                  initial_scale=1.0):
+        """
+        Initializes a new instance of the Wumpus class.
+
+        Parameters:
+        picture_path (str): The path to the image file for the Wumpus.
+        cell (Cell): The cell that the Wumpus is in.
+        cell_center (tuple[int, int]): The center of the cell that the Wumpus is in.
+        initial_scale (float): The initial scale of the Wumpus image.
+        """
         super().__init__()
 
         self.monster = Object(picture_path, cell, cell_center, initial_scale)
@@ -68,9 +94,24 @@ class Wumpus():
         # self.group.add(self.monster)
 
     def add_stench(self, new_stench):
+        """
+        Adds a stench to the Wumpus's group of sprites.
+
+        Parameters:
+        new_stench (Sprite): The stench to add.
+        """
         self.group.add(new_stench)
 
     def check_killed(self, arrow):
+        """
+        Checks if the Wumpus has been killed by an arrow.
+
+        Parameters:
+        arrow (Arrow): The arrow to check.
+
+        Returns:
+        bool: True if the Wumpus has been killed, False otherwise.
+        """
         if self.rect.colliderect(arrow.rect):
             return True
         else:
@@ -79,6 +120,13 @@ class Wumpus():
 
 class Arrow(pygame.sprite.Sprite):
     def __init__(self, player_rect, target_cell):
+        """
+        Initializes a new instance of the Arrow class.
+
+        Parameters:
+        player_rect (Rect): The rectangle representing the player's position.
+        target_cell (Cell): The cell that the arrow is targeting.
+        """
         super().__init__()
         self.image = pygame.Surface((10, 5))
         self.original_image = pygame.image.load("Graphics/rush_arrow.png").convert_alpha()

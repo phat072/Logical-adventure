@@ -2,8 +2,16 @@ import pygame
 import sys
 from Game import Game
 class Monitor:
-    """Tạo màn hình khi khởi chạy game"""
+    """
+    A class representing the initial screen of the game.
+    """
     def __init__(self, screen):
+        """
+        Initialize a new instance of the Monitor class.
+
+        Parameters:
+        screen (pygame.Surface): The surface to draw on.
+        """
         self.screen = screen
         self.WIDTH = screen.get_width()
         self.HEIGHT = screen.get_height()
@@ -15,6 +23,9 @@ class Monitor:
 
 
     def run(self):
+        """
+        Run the main loop of the Monitor.
+        """
         running = True
         while running:
             self.screen.blit(self.BG, (0, 0))
@@ -34,6 +45,12 @@ class Monitor:
 
 class Menu:
     def __init__(self, screen):
+        """
+        Initialize a new instance of the Menu class.
+
+        Parameters:
+        screen (pygame.Surface): The surface to draw on.
+        """
         self.screen = screen
         self.WIDTH = screen.get_width()
         self.HEIGHT = screen.get_height()
@@ -58,6 +75,16 @@ class Menu:
         ]
 
     def draw_text(self, text, font, color, x, y):
+        """
+        Draw text on the screen.
+
+        Parameters:
+        text (str): The text to draw.
+        font (pygame.font.Font): The font to use.
+        color (tuple): The color to use.
+        x (int): The x-coordinate of the top left corner of the text.
+        y (int): The y-coordinate of the top left corner of the text.
+        """
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect(topleft=(x, y))
         self.screen.blit(text_surface, text_rect)
